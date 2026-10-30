@@ -26,4 +26,9 @@ Content-Type: application/json
 GET http://localhost:8082/api/transactions
 
 ### TRANSACTION : via la gateway
-GET http://localhost:8080/api/transactions
+GET http://localhost:8080/api/transactionsservices:
+    kafka:
+    image: apache/kafka:3.8.0
+    container_name: kafka
+    ports:
+    - "9092:9092"
