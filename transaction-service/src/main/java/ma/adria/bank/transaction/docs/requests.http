@@ -1,0 +1,14 @@
+### Créer une transaction (remplace l'UUID par celui d'un compte)
+POST http://localhost:8082/api/transactions
+Content-Type: application/json
+
+{"accountId":"UUID-DU-COMPTE","amount":100,"currency":"EUR","merchantCategory":"FOOD","country":"MA"}
+
+### Plafond dépassé (doit renvoyer 400)
+POST http://localhost:8082/api/transactions
+Content-Type: application/json
+
+{"accountId":"UUID-DU-COMPTE","amount":1500,"currency":"EUR","merchantCategory":"FOOD","country":"MA"}
+
+### Lister
+GET http://localhost:8082/api/transactions
