@@ -1,0 +1,54 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: transaction-service
+  config:
+    import: optional:configserver:http://localhost:8888
+  graphql:
+    graphiql:
+      enabled: true
+  ai:
+    mcp:
+      server:
+        name: transaction-mcp
+        version: 1.0.0
+        type: SYNC
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,circuitbreakers,retries
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+resilience4j:
+  circuitbreaker:
+    instances:
+      accountService:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        ignore-exceptions:
+          - feign.FeignException$NotFound
+  retry:
+    instances:
+      accountService:
+        max-attempts: 3
+        wait-duration: 500ms
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

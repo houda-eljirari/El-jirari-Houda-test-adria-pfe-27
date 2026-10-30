@@ -27,9 +27,9 @@
         <module>config-service</module>
         <module>discovery-service</module>
         <module>gateway-service</module>
-        <!--
         <module>account-service</module>
         <module>transaction-service</module>
+        <!--
         <module>event-consumer-service</module>
         <module>chatbot-service</module>
         -->
