@@ -32,3 +32,20 @@ GET http://localhost:8080/api/transactionsservices:
     container_name: kafka
     ports:
     - "9092:9092"
+### CHATBOT : lister les comptes
+POST http://localhost:8084/chat
+Content-Type: application/json
+
+{"message":"Liste tous les comptes bancaires"}
+
+### CHATBOT : transaction
+POST http://localhost:8084/chat
+Content-Type: application/json
+
+{"message":"Enregistre une transaction de 100 EUR dans la catégorie FOOD au Maroc (MA) sur le premier compte, puis donne-moi les transactions de ce compte"}
+
+### CHATBOT : plafond
+POST http://localhost:8084/chat
+Content-Type: application/json
+
+{"message":"Enregistre une transaction de 1500 EUR sur le premier compte"}
