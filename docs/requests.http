@@ -1,0 +1,29 @@
+### ACCOUNT : créer un compte
+POST http://localhost:8081/api/accounts
+Content-Type: application/json
+
+{"customerReference":"CUST-001","currency":"EUR","balance":500}
+
+### ACCOUNT : lister
+GET http://localhost:8081/api/accounts
+
+### ACCOUNT : via la gateway
+GET http://localhost:8080/api/accounts
+
+### TRANSACTION : créer (remplace UUID-DU-COMPTE par l'id du compte créé)
+POST http://localhost:8082/api/transactions
+Content-Type: application/json
+
+{"accountId":"UUID-DU-COMPTE","amount":100,"currency":"EUR","merchantCategory":"FOOD","country":"MA"}
+
+### TRANSACTION : plafond dépassé (doit renvoyer 400)
+POST http://localhost:8082/api/transactions
+Content-Type: application/json
+
+{"accountId":"UUID-DU-COMPTE","amount":1500,"currency":"EUR","merchantCategory":"FOOD","country":"MA"}
+
+### TRANSACTION : lister
+GET http://localhost:8082/api/transactions
+
+### TRANSACTION : via la gateway
+GET http://localhost:8080/api/transactions
